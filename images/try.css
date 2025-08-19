@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* --- Old Money Aesthetic Remodel --- */
+    /* 1. Font Import: Replaced bold, modern fonts with classic, elegant ones. */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Barlow:wght@400;600&display=swap');
+  
+    /* 2. Color Palette & Global Styles: Defined a sophisticated palette and applied it globally. */
+    :root {
+      --bg-charcoal: #222222;
+      --bg-ivory: #fdfbf5;
+      --text-dark: #333333;
+      --text-light: #fdfbf5;
+      --accent-navy: #1a2a44;
+      --accent-gold: #bda37c;
+      --accent-burgundy: #6a040f;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-charcoal);
+      font-family: 'Barlow', sans-serif; /* Using Barlow for clean body text */
+      color: var(--text-light);
+    }
+  
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      z-index: 11;
+      position: fixed;
+      top: 2.5rem;
+      left: 1rem;
+    }
+  
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background-color: var(--text-light);
+      margin: 4px 0;
+      display: block;
+    }
+  
+    /* 3. Navigation: Updated to use the new color scheme for a more integrated look. */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(26, 42, 68, 0.9); /* Transparent Navy */
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+      border-bottom: 1px solid var(--accent-gold);
+    }
+  
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+  
+    nav ul li a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+      font-family: 'Playfair Display', serif;
+    }
+  
+    nav ul li a:hover {
+      color: var(--accent-gold);
+    }
+  
+    @media (max-width: 768px) {
+      nav {
+        justify-content: flex-start;
+        padding-left: 4rem;
+      }
+  
+      nav ul {
+        flex-direction: column;
+        background-color: var(--accent-navy);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        display: none;
+        padding: 1rem 2rem;
+      }
+  
+      nav ul.active {
+        display: flex;
+      }
+  
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  
+    /* 4. Header: Switched to elegant serif fonts and refined colors for a stately feel. */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+  
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 14rem; /* Adjusted for elegance */
+      margin: 0;
+      z-index: 1;
+      letter-spacing: 2px;
+      text-shadow: none; /* Cleaner look */
+      line-height: 0.9;
+    }
+  
+    header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 12rem; /* Adjusted for elegance */
+      margin: 0;
+      z-index: 1;
+      color: var(--accent-gold); /* Using gold accent */
+      letter-spacing: 1px;
+      line-height: 0.9;
+    }
+  
+    header img {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      max-height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    /* 5. Hover Effect: Replaced the yellow glow with a subtle, classic brightness effect. */
+    .glow-trace {
+      transition: filter 0.3s ease;
+    }
+    
+    .glow-trace:hover {
+      filter: brightness(1.15);
+    }
+    
+    .intro {
+      text-align: justify;
+    }
+    .quote {
+      text-align: justify;
+      font-size: 0.9em;
+      font-style: italic;
+      color: var(--accent-gold); /* Softened quote color */
+    }
+    
+    .image-left-section {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 4rem 2rem;
+      background-color: var(--bg-charcoal);
+      flex-wrap: wrap;
+    }
+  
+    .image-left-section img {
+      width: 400px;
+      height: auto;
+      margin-right: 2rem;
+    }
+    
+    .text-content {
+      max-width: 600px;
+      color: var(--text-light);
+      font-family: 'Barlow', sans-serif;
+    }
+  
+    .text-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    .text-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  
+    .text-content p.intro {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+  
+    .card-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+  
+    .card-section-title {
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 2rem;
+    }
+  
+    /* 6. My Expertise Section: Swapped high-contrast colors for a refined navy and ivory scheme. */
+    .card-section.expertise {
+      background-color: var(--bg-ivory);
+    }
+
+    .card-section.expertise .card-section-title {
+      color: var(--text-dark);
+    }
+
+    .card-section.expertise .card {
+      background-color: var(--accent-navy);
+      color: var(--text-light);
+      width: 300px;
+      padding: 2rem;
+      border-radius: 2px; /* Sharper edges */
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-section.expertise .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .card-section.expertise .card h3 {
+      font-family: 'Playfair Display', serif; /* Elegant serif for headings */
+      font-size: 2rem;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .card-section.expertise .card p {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* 7. Educational Background: Replaced bright red with burgundy and gold for a classic timeline. */
+    .card-section.education {
+      background-color: var(--bg-charcoal);
+      padding: 4rem 2rem;
+    }
+
+    .card-section.education .card-section-title {
+      color: var(--text-light);
+    }
+
+    .card-section.education .timeline {
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 30px;
+    }
+
+    .card-section.education .timeline-item {
+      position: relative;
+    }
+
+    .card-section.education .timeline-dot {
+      position: absolute;
+      left: -11px; /* Adjusted for thinner border */
+      top: 10px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: var(--bg-charcoal);
+      border: 2px solid var(--accent-gold);
+    }
+
+    .card-section.education .card {
+      background-color: var(--bg-ivory);
+      color: var(--text-dark);
+      border-left: 4px solid var(--accent-burgundy);
+      border-radius: 2px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      max-height: 400px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      position: relative;
+    }
+    
+    /* Custom Button for 'See More' */
+    .btn-custom-gold {
+      background-color: var(--accent-gold);
+      color: var(--text-dark);
+      border: 1px solid var(--accent-gold);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .btn-custom-gold:hover {
+      background-color: transparent;
+      color: var(--accent-gold);
+    }
+
+
+    .card-section.education .card.expanded {
+      max-height: 800px;
+    }
+
+    .card-section.education .card:hover {
+      transform: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-section.education .accordion {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .card-section.education .card h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card-section.education .card p,
+    .card-section.education .card ul li {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .card-section.education .btn {
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .card-section.education .extra-info {
+      display: none;
+      margin-top: 1rem;
+    }
+    
+    .card-section.education .card {
+      max-height: 500px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    
+    .card-section.education .card.expanded {
+      max-height: 800px;
+    }
+    
+    .card-section.education .card-body {
+      overflow: hidden;
+      padding-bottom: 3rem;
+    }
+    
+    .card-section.education .btn {
+      display: block;
+      margin-top: 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    
+    .card-section.education .collapse {
+      margin-top: 1rem;
+    }
+
+    /* 8. Activity Monitor: Added a subtle ivory overlay to vintage-ify the background image. */
+    #activity-monitor {
+      position: relative;
+      background-image: url('digicam.png');
+      background-color: var(--bg-ivory);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #activity-monitor::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(253, 251, 245, 0.4); /* Ivory Overlay */
+      z-index: 1;
+    }
+
+    .activity-title {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2; /* Ensure title is above overlay */
+      font-family: 'Playfair Display', serif; 
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      text-shadow: none;
+      letter-spacing: 1px;
+    }
+
+    .carousel-overlay-container {
+      position: absolute;
+      top: 55%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      max-width: 505px;
+      z-index: 2; /* Ensure carousel is above overlay */
+      padding: 1vw;
+      border-radius: 2px;
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+    
+    #customCarousel {
+      width: 100%;
+    }
+    
+    .carousel-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-overlay-container {
+        width: 90vw;
+        left: 50%;
+        padding: 4vw;
+        border-radius: 2px;
+      }
+    
+      #activity-monitor {
+        height: auto;
+        padding-bottom: 2rem;
+      }
+      .photo-frame {
+        width: 90px;
+        height: 120px;
+      }
+    
+      .frame1 { top: 80px; }
+      .frame2 { top: 220px; }
+      .frame3 { top: 360px; }
+      .frame4 { top: 500px; }
+    }
+    
+    @media (max-width: 480px) {
+      .carousel-overlay-container {
+        width: 95vw;
+        padding: 5vw;
+        border-radius: 2px;
+      }
+    }
+    
+    /* 9. Experience Accordion: Themed with navy and ivory for a cohesive, high-end feel. */
+    .accordion-button.custom-accordion {
+      background-color: var(--accent-navy) !important;
+      color: var(--text-light) !important;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      border: none;
+    }
+    
+    .accordion-button.custom-accordion:not(.collapsed) {
+      background-color: var(--accent-navy) !important;
+      color: var(--accent-gold) !important;
+    }
+
+    .accordion-button.custom-accordion:focus {
+      box-shadow: none;
+    }
+
+    .custom-body {
+      background-color: var(--bg-ivory);
+      color: var(--text-dark);
+      padding: 1rem;
+    }
+
+    .year-tag {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      font-weight: normal;
+      color: var(--text-light);
+      text-align: right;
+    }
+
+    /* 10. Photobooth Section: Added a subtle blend mode to give the background a warmer, aged look. */
+    #photobooth-strip {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-image: url('photobooth.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--bg-charcoal);
+      background-blend-mode: luminosity;
+    }
+      
+    .photo-frame {
+      position: absolute;
+      width: 120px;
+      height: 160px;
+      overflow: hidden;
+      border-radius: 2px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+      
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+      
+    .frame1 { top: 100px; left: 50%; transform: translateX(-50%); }
+    .frame2 { top: 280px; left: 50%; transform: translateX(-50%); }
+    .frame3 { top: 460px; left: 50%; transform: translateX(-50%); }
+    .frame4 { top: 640px; left: 50%; transform: translateX(-50%); }
+      
+    .card-footer {
+      width: 100%;
+      text-align: center;
+      font-family: 'Barlow', sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      background-color: var(--bg-ivory);
+      border-top: 2px solid var(--accent-navy);
+      border-bottom: 2px solid var(--accent-navy);
+      letter-spacing: 0.5px;
+    }
+  
+    /* 11. Contact Section: Styled the form to match the classic aesthetic. */
+    .contact-section {
+      background-color: var(--bg-charcoal);
+      padding: 4rem 2rem;
+      overflow-x: auto;
+    }
+    
+    .contact-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .contact-photo {
+      flex-shrink: 0;
+      width: 350px;
+      margin-top: 4rem;
+    }
+    
+    .contact-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+    }
+    
+    .contact-form {
+      flex-shrink: 1;
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .contact-form h2 {
+      margin-bottom: 2rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+      text-align: center;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--accent-gold);
+      border-radius: 2px;
+      background-color: var(--bg-ivory);
+      color: var(--text-dark);
+      font-family: 'Barlow', sans-serif;
+    }
+    
+    .contact-form button {
+      align-self: center;
+      padding: 1rem 2rem;
+      background-color: var(--accent-gold);
+      color: var(--text-dark);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 600;
+      margin-top: 1rem;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+        background-color: #a99268; /* Darker gold on hover */
+    }
+
+    /* 12. Footer: Final touch with the deep navy background. */
+    footer {
+      background-color: var(--accent-navy);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1rem;
+    }
+  
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 6rem;
+      }
+  
+      header h2 {
+        font-size: 5rem;
+      }
+  
+      header img {
+        width: 60%;
+        height: auto;
+        top: 60%;
+        transform: translate(-50%, -50%);
+      }
+  
+      .image-left-section {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+      }
+  
+      .image-left-section img {
+        width: 40%;
+        height: auto;
+        margin: 0;
+      }
+  
+      .text-content {
+        width: 55%;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+  
+      .text-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+  
+      .text-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+  
+      .text-content p.intro {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+      }
+      
+      .card-section {
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      .card {
+        width: 90%;
+      }
+  
+      .contact-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    
+      .contact-photo {
+        width: 200px;
+      }
+    
+      .contact-form {
+        max-width: calc(100% - 220px);
+      }
+  
+      .timeline {
+        border-left: 2px solid var(--accent-gold);
+        padding-left: 30px;
+      }
+  
+      .timeline-dot {
+        position: absolute;
+        left: -11px;
+        top: 10px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid var(--accent-gold);
+      }
+      @media (max-width: 480px) {
+        .carousel-overlay-container {
+          padding: 4vw;
+          border-radius: 2px;
+        }
+      }
+    }
+  </style>   
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70" tabindex="0">
+
+  <button class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav id="navbar">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <header id="home">
+    <h1>Francesca</h1>
+    <h2>Borbon</h2>
+    <img src="picme.png" alt="Francesca" />
+  </header>
+
+  <section id="resume" class="image-left-section">
+  <img src="picme2.png" alt="Francesca Left Side" class="glow-trace" />
+  <div class="text-content">
+    <h3>Hello, I'm Francesca!</h3>
+    <p><strong>Engineering the Future with Every Line of Code</strong></p>
+    <p class="intro">
+      I’m an aspiring computer engineer fueled by curiosity, creativity, and a commitment to continuous growth. I build with intention—whether it’s crafting seamless user experiences, designing embedded systems, or refining code until it’s clean and purposeful. Every project is a step forward, every challenge a chance to evolve. This portfolio reflects not just what I’ve built, but who I’m becoming.</p>
+
+    <p class="quote">“The future belongs to those who learn more skills and combine them in creative ways.” — Robert Greene</p>
+  </div>
+</section>
+
+
+  <section id="projects" class="card-section expertise">
+    <div class="card-section-title">MY EXPERTISE</div>
+    <div class="card">
+      <h3>Software & App Development</h3>
+      <p>Programming Languages</p>
+    </div>
+    <div class="card">
+      <h3>Web Development</h3>
+      <p>Front/Back End Development</p>
+    </div>
+    <div class="card">
+      <h3>Embedded Systems</h3>
+      <p>Microcontroller Programming & Hardware Integration</p>
+    </div>
+  </section>
+
+
+<section id="education" class="card-section education">    
+  <div class="card-section-title">EDUCATIONAL BACKGROUND</div>
+
+  <div class="timeline position-relative">
+
+<div class="timeline-item mb-5 position-relative">
+  <div class="timeline-dot"></div>
+  <div class="card ms-5 shadow-sm">
+    <div class="card-body">
+
+      <div id="collegeCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <img src="uemnl5.png" alt="UE Manila 1" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="uemnl3.jpg" alt="UE Campus" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="uemnl2.jpeg" alt="UE Logo" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#collegeCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#collegeCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+
+      <h4 class="card-title fw-semibold">University of the East – Manila</h4>
+      <h6 class="text-muted">Tertiary Education</h6>
+      <p class="text-secondary mb-1">2219 C.M. Recto Ave, Sampaloc, Manila</p>
+      <p class="text-secondary mb-2">2023 – Present</p>
+
+      <button class="btn btn-custom-gold btn-sm" data-bs-toggle="collapse" data-bs-target="#collegeDetails">
+        See more
+      </button>
+      <div id="collegeDetails" class="collapse mt-3">
+        <ul class="mb-0">
+          <li>Bachelor of Science in Computer Engineering</li>
+          <li>Computer Engineering is the integration of software and hardware to design, develop, and optimize intelligent systems. It bridges programming and electronics to create innovative solutions 
+            from embedded devices and automation to networked systems and digital interfaces driving the future of technology.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="timeline-item mb-5 position-relative">
+  <div class="timeline-dot"></div>
+  <div class="card ms-5 shadow-sm">
+    <div class="card-body">
+
+      <div id="seniorCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <img src="uemnl5.png" alt="UE Senior High 1" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="uemnl4.jpeg" alt="UE Senior High 2" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="uemnl2.jpeg" alt="UE Senior Logo" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#seniorCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#seniorCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+
+      <h4 class="card-title fw-semibold">University of the East – Manila</h4>
+      <h6 class="text-muted">Senior High School</h6>
+      <p class="text-secondary mb-1">2219 C.M. Recto Ave, Sampaloc, Manila</p>
+      <p class="text-secondary mb-2">2021 – 2023</p>
+
+      <button class="btn btn-custom-gold btn-sm" data-bs-toggle="collapse" data-bs-target="#seniorDetails">
+        See more
+      </button>
+      <div id="seniorDetails" class="collapse mt-3">
+        <ul class="mb-0">
+          <li>Science, Technology, Engineering, Mathematics (STEM) Strand </li>
+          <li>Graduated with Honors</li>
+          <li>Participated in science clubs and researches</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="timeline-item mb-5 position-relative">
+  <div class="timeline-dot"></div>
+  <div class="card ms-5 shadow-sm">
+    <div class="card-body">
+
+      <div id="juniorCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <img src="vmhs2.jpeg" alt="Victorino Mapa 1" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="vmhs1.jpg" alt="Victorino Mapa 2" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#juniorCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#juniorCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+
+      <h4 class="card-title fw-semibold">Victorino Mapa High School</h4>
+      <h6 class="text-muted">Junior High School</h6>
+      <p class="text-secondary mb-1">Mendiola Extension, San Miguel, Manila</p>
+      <p class="text-secondary mb-2">2017 – 2021</p>
+
+      <button class="btn btn-custom-gold btn-sm" data-bs-toggle="collapse" data-bs-target="#juniorDetails">
+        See more
+      </button>
+      <div id="juniorDetails" class="collapse mt-3">
+        <ul class="mb-0">
+          <li>Strong academic performance</li>
+          <li>Built foundations in science, math, and tech</li>
+          <li>Engaged in student leadership and extracurriculars</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section id="activity-monitor">
+  <h2 class="activity-title">ACTIVITY MONITOR</h2>
+
+  <div class="carousel-overlay-container">
+    <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="engwk.jpg" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk2.jpg" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk3.jpg" class="d-block w-100" alt="Slide 3">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk5.jpg" class="d-block w-100" alt="Slide 4">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk6.jpg" class="d-block w-100" alt="Slide 5">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk1.jpg" class="d-block w-100" alt="Slide 6">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk2.jpg" class="d-block w-100" alt="Slide 7">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk3.jpg" class="d-block w-100" alt="Slide 8">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk4.jpg" class="d-block w-100" alt="Slide 9">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk5.jpg" class="d-block w-100" alt="Slide 10">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="py-5" style="background-color: var(--bg-charcoal);">
+  <div class="container">
+    <h2 class="mb-4 text-center" style="color: var(--text-light); font-family: 'Playfair Display', serif;">My Experiences</h2>
+
+    <div class="accordion" id="experienceAccordion">
+
+      <div class="accordion-item border-0 mb-2">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button custom-accordion collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <span class="org-name">UE Society of Computer Engineering Students</span>
+            <span class="year-tag">2023-Present</span>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#experienceAccordion">
+          <div class="accordion-body custom-body">
+            <strong>Position:</strong> Member<br>
+            <strong>Description:</strong> The University of The East Society of Computer Engineering Students (UE SCPES) is a student organization dedicated to fostering academic excellence, professional growth, and community engagement among computer engineering students at the University of The East.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button custom-accordion collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <span class="org-name">UE ARMS</span>
+            <span class="year-tag">2025-Present</span>
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#experienceAccordion">
+          <div class="accordion-body custom-body">
+            <strong>Position:</strong> Treasurer<br>
+            <strong>Description:</strong> The University of The East Automation Robotics Mechatronics Society (UE ARMS) is a student organization focused on advancing knowledge and skills in automation, robotics, and mechatronics. UE ARMS provides a platform for students to engage in hands-on projects, workshops, and competitions, fostering innovation and technical expertise.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="photobooth-strip">
+  <div class="photo-frame frame1">
+    <a href="https://www.facebook.com/uescpes/posts/pfbid0hT1W3muvTaPEk7rJdoye9HiMaFnecThbxSwM8WqoZeTCFwgUj9Ai1v2f7zAXhC86l" target="_blank">
+      <img src="figma.jpg" alt="Photo 1">
+    </a>
+  </div>
+  <div class="photo-frame frame2">
+    <a href="https://www.facebook.com/uescpes/posts/pfbid08UdZkrkRnDYamvzhX5Q5hXq1SCW9He2m49SpVS5kAnTGDSYsn6kgSpNHLGJbspMRl" target="_blank">
+      <img src="github.jpg" alt="Photo 2">
+    </a>
+  </div>
+  <div class="photo-frame frame3">
+    <a href="https://www.facebook.com/uescpes/posts/pfbid02KBkQHryPXEcDzTTGv1LvVHpqyr1aBkXA6mn4e2aGGNuhvX56cpEgJCFDHxuEAW4l" target="_blank">
+      <img src="arduino.jpg" alt="Photo 3">
+    </a>
+  </div>
+</section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-wrapper">
+      
+      <div class="contact-photo">
+        <img src="picme3.png" alt="Francesca" />
+      </div>
+
+      <div class="contact-form">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required rows="5"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+  
+    </div>
+  </section>
+  
+
+  <footer>
+    © 2025 Francesca Borbon. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleMenu() {
+      const navList = document.querySelector('nav ul');
+      navList.classList.toggle('active');
+    }
+    document.querySelectorAll('.btn-custom-gold').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-bs-target');
+        const collapse = document.querySelector(targetId);
+        const card = button.closest('.card');
+  
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(collapse);
+        bsCollapse.toggle();
+  
+        card.classList.toggle('expanded');
+      });
+    });
+  </script>
+</body>
+
+</html>
