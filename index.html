@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@700&family=Barlow:wght@400;600&family=Oswald:wght@500&display=swap');
+  
+    body {
+      margin: 0;
+      background-color: #000000;
+      font-family: 'Anton', sans-serif;
+      color: #f5f5dc;
+    }
+  
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      z-index: 11;
+      position: fixed;
+      top: 2.5rem;
+      left: 1rem;
+    }
+  
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background-color: #f5f5dc;
+      margin: 4px 0;
+      display: block;
+    }
+  
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+      border-bottom: 1px solid #f5f5dc;
+    }
+  
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+  
+    nav ul li a {
+      color: #f5f5dc;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+  
+    nav ul li a:hover {
+      color: #ffffff;
+    }
+  
+    @media (max-width: 768px) {
+      nav {
+        justify-content: flex-start;
+        padding-left: 4rem;
+      }
+  
+      nav ul {
+        flex-direction: column;
+        background-color: #000000;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        display: none;
+        padding: 1rem 2rem;
+      }
+  
+      nav ul.active {
+        display: flex;
+      }
+  
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+  
+    header h1 {
+      font-size: 16rem;
+      margin: 0;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+      line-height: 0.9;
+    }
+  
+    header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 14rem;
+      margin: 0;
+      z-index: 1;
+      text-transform: uppercase;
+      color: #f5f5dc;
+      letter-spacing: 1px;
+      line-height: 0.9;
+    }
+  
+    header img {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      max-height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .glow-trace {
+      transition: filter 0.3s ease;
+    }
+    
+    .glow-trace:hover {
+      filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+    }
+    
+    .intro {
+      text-align: justify;
+    }
+    .quote {
+      text-align: justify;
+      font-size: 0.9em;
+      font-style: italic;
+      color: #555; /* Optional: softens the tone */
+    }
+    
+  
+    .image-left-section {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 4rem 2rem;
+      background-color: #000000;
+      flex-wrap: wrap;
+    }
+  
+    .image-left-section img {
+      width: 400px;
+      height: auto;
+      margin-right: 2rem;
+    }
+    
+    .text-content {
+      max-width: 600px;
+      color: #f5f5dc;
+      font-family: 'Playfair Display', serif;
+    }
+  
+    .text-content h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    .text-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  
+    .text-content p.intro {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+  
+    .card-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+  
+    .card-section-title {
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 2rem;
+    }
+  
+    /* MY EXPERTISE SECTION */
+.card-section.expertise {
+  background-color: #f5f5dc; /* Cream */
+  padding: 4rem 2rem;
+}
+
+.card-section.expertise .card-section-title {
+  color: #000000;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.expertise-card {
+  background-color: #000C3F; /* Royal Blue */
+  color: #f5f5dc;            /* Cream text */
+  width: 300px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 12, 63, 0.2);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.expertise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 12, 63, 0.3);
+}
+
+.expertise-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+.expertise-card p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* EDUCATIONAL BACKGROUND SECTION */
+.card-education {
+  padding: 2rem;
+  background-color: #000;
+  text-align: center;
+}
+
+.card-education-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #f5deb3; /* Cream */
+  letter-spacing: 1px;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.education-card {
+  flex: 0 0 auto;
+  width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  opacity: 0.6;
+  transform: scale(0.95);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+}
+
+.education-card:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3); /* Gold glow */
+}
+
+.education-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.education-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #000000; /* Black for degree title */
+}
+
+.education-card p {
+  font-size: 0.9rem;
+  color: #333;
+  padding: 0 1rem 1rem;
+}
+
+/* MODAL STYLES */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: #F5F5DC;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: left;
+  color: #4B2E2E;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
+
+.modal-photo {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.modal-carousel {
+  position: relative;
+  width: 100%;
+  max-height: 250px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carousel-slide.active {
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+
+
+
+    #activity-monitor {
+      position: relative;
+      background-image: url('digicam.png');
+      background-color: #f5f5dc; /* Replace with your actual image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .activity-title {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      font-family: 'Playfair Display', serif; 
+      font-size: 3rem;
+      font-weight: bold;
+      color: #000000;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      letter-spacing: 1px;
+    }
+
+    .carousel-overlay-container {
+      position: absolute;
+      top: 55%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      max-width: 505px;
+      z-index: 10;
+      padding: 2vw;
+      border-radius: 12px;
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+    
+    /* Make the carousel itself responsive */
+    #customCarousel {
+      width: 100%;
+    }
+    
+    /* Make carousel images responsive */
+    .carousel-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .experience-section {
+      background-color: #000000; /* Black background */
+      color: #f5f5dc; /* Cream text */
+      padding: 2rem;
+    }
+    
+    .experience-title {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      z-index: 1;
+      text-transform: uppercase;
+      color: #f5f5dc;
+      letter-spacing: 1px;
+      line-height: 0.9;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }                
+    
+
+/* EXPERIENCE */
+.accordion {
+  width: 90%;
+  max-width: 500px; /* 👈 Controls the actual width */
+  margin: 0 auto;   /* 👈 Centers it horizontally */
+}
+.accordion-item {
+  background-color: #664110; /* Light brown */
+  margin-bottom: 0.75rem;     /* Slightly tighter spacing */
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.9rem;          /* Smaller text */
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;        /* Reduced padding */
+  cursor: pointer;
+  font-weight: 600;
+  color: #f5f5dc;              /* Cream text */
+}
+
+.accordion-content {
+  padding: 0.6rem 1rem;        /* Reduced padding */
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  color: #f5f5dc;              /* Cream text */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+    
+    
+/* Wrapper with digicam background */
+.carousel-wrapper {
+  background-image: url('digicam.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Screen area inside digicam */
+.carousel-screen {
+  position: absolute;
+  top: 22%;
+  left: 28%;
+  width: 44%;
+  height: 38%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Carousel images */
+.carousel-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.carousel-img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Navigation buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fdf6e3;
+  color: #2c3e91;
+  border: 2px solid #2c3e91;
+  font-size: 1.5rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #2c3e91;
+  color: #fdf6e3;
+}
+
+.prev-btn { left: 4%; }
+.next-btn { right: 4%; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-screen {
+    top: 24%;
+    left: 27%;
+    width: 46%;
+    height: 36%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-screen {
+    top: 25%;
+    left: 26%;
+    width: 48%;
+    height: 34%;
+  }
+}
+
+
+
+/* Section wrapper */
+.workshop-section {
+  background-color: #f5f5dc;   /* Cream tone */
+  padding: 3rem 2rem;
+}
+
+/* Title styling */
+.workshop-header h2 {
+  font-size: 2.5rem;
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+/* Centered title */
+.workshop-header h2 {
+  font-size: 2.5rem;
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-align: center;             /* ⬅️ Center the title */
+  padding-left: 0;
+}
+
+/* Photostrip layout */
+#photobooth-strip {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+  background-image: url('photobooth.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+/* Inner container */
+.photostrip-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Photo + text block */
+.photo-block {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Photo frame */
+.photo-frame {
+  width: 380px;
+  height: 220px;
+  margin-left: 1rem;           /* ⬅️ Nudges photo to the right */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+/* Image fill */
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text beside photo */
+.photo-text {
+  max-width: 400px;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-left: 10rem;        /* ⬅️ Pushes text further right */
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .photo-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .photo-text {
+    max-width: 100%;
+  }
+
+  .photo-frame {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 19 / 11;
+  }
+}
+
+/*PROJECTS*/
+.projects-section {
+  padding: 4rem 2rem;
+  background-color: #000;
+  text-align: center;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* ⬅️ Smaller card base */
+  gap: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+
+.project-card {
+  position: relative;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover overlay */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(218, 218, 218, 0.95);
+  color: #333;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+.project-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #0056b3;
+}
+
+.card-overlay p {
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.card-overlay button {
+  background-color: #007bff;
+  color: rgb(255, 254, 254);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+/* Modal base */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content */
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.carousel-slide.active {
+  display: block;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Description */
+.modal-description {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.modal-description h3 {
+  color: #0056b3;
+  margin-bottom: 0.5rem;
+}
+
+.modal-description p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+    
+    .card-footer {
+      width: 100%;
+      text-align: center;
+      font-family: 'Barlow', sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      background-color: #f5f5dc;
+      border-top: 2px solid #000C3F;
+      border-bottom: 2px solid #000C3F;
+      letter-spacing: 0.5px;
+    }
+  
+    .contact-section {
+      background-color: #000000;
+      padding: 4rem 2rem;
+      overflow-x: auto; /* Enables horizontal scroll if needed */
+    }
+    
+    .contact-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: nowrap; /* Prevent stacking */
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Photo stays left */
+    .contact-photo {
+      flex-shrink: 0;
+      width: 350px;
+      margin-top: 4rem;
+    }
+    
+    .contact-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    /* Form stays right */
+    .contact-form {
+      flex-shrink: 1;
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centers title and button */
+    }
+    
+    /* Centered Title */
+    .contact-form h2 {
+      margin-bottom: 2rem;
+      font-family: 'Anton', sans-serif;
+      color: #f5f5dc;
+      text-align: center;
+    }
+    
+    /* Full-width Inputs */
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #f5f5dc;
+      color: #000000;
+      font-family: sans-serif;
+    }
+    
+    /* Centered Button */
+    .contact-form button {
+      align-self: center; /* This centers the button in the form's column layout */
+      padding: 1rem 2rem;
+      background-color: #000C3F;
+      color: #f5f5dc;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Anton', sans-serif;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+
+   
+    footer {
+      background-color: #000C3F;
+      color: #f5f5dc;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1rem;
+    }
+  
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 6rem;
+      }
+  
+      header h2 {
+        font-size: 5rem;
+      }
+  
+      header img {
+        width: 60%;
+        height: auto;
+        top: 60%;
+        transform: translate(-50%, -50%);
+      }
+  
+      .image-left-section {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+      }
+  
+      .image-left-section img {
+        width: 40%;
+        height: auto;
+        margin: 0;
+      }
+  
+      .text-content {
+        width: 55%;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+  
+      .text-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+  
+      .text-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+  
+      .text-content p.intro {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+      }
+      
+  
+      .card-section {
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      .card {
+        width: 90%;
+      }
+  
+      .contact-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    
+      .contact-photo {
+        width: 200px;
+      }
+    
+      .contact-form {
+        max-width: calc(100% - 220px); /* Leaves space for image */
+      }
+  
+      @media (max-width: 480px) {
+        .carousel-overlay-container {
+          padding: 4vw;
+          border-radius: 8px;
+        }
+      }
+    }
+  </style>   
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70" tabindex="0">
+
+  <!-- Hamburger Toggle Button -->
+  <button class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- ✅ Navbar with ID for ScrollSpy -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- ✅ Section with ID "home" -->
+  <header id="home">
+    <h1>Francesca</h1>
+    <h2>Borbon</h2>
+    <img src="picme.png" alt="Francesca" />
+  </header>
+
+  <!-- ✅ Section with ID "resume" -->
+<!-- ✅ Section with ID "resume" -->
+<section id="resume" class="image-left-section">
+  <img src="picme2.png" alt="Francesca Left Side" class="glow-trace" />
+  <div class="text-content">
+    <h3>Hello, I'm Francesca!</h3>
+    <p><strong>Engineering the Future with Every Line of Code</strong></p>
+    <p class="intro">
+      I’m an aspiring computer engineer fueled by curiosity, creativity, and a commitment to continuous growth. I build with intention—whether it’s crafting seamless user experiences, designing embedded systems, or refining code until it’s clean and purposeful. Every project is a step forward, every challenge a chance to evolve. This portfolio reflects not just what I’ve built, but who I’m becoming.</p>
+
+    <p class="quote">“The future belongs to those who learn more skills and combine them in creative ways.” — Robert Greene    </p>
+  </div>
+</section>
+
+
+  <!-- ✅ Section with ID "projects" -->
+  <section id="projects" class="card-section expertise">
+    <div class="card-section-title">MY EXPERTISE</div>
+    <div class="expertise-card">
+      <h3>Software & App Development</h3>
+      <p>Programming Languages</p>
+    </div>
+    <div class="expertise-card">
+      <h3>Web Development</h3>
+      <p>Front/Back End Development</p>
+    </div>
+    <div class="expertise-card">
+      <h3>Embedded Systems</h3>
+      <p>Microcontroller Programming & Hardware Integration</p>
+    </div>
+  </section>
+
+  <section id="education" class="card-education">
+    <div class="card-education-title">EDUCATIONAL BACKGROUND</div>
+  
+    <div class="carousel">
+      <div class="education-card" onclick="openModal('modal1')">
+        <img src="uemnl1.png" alt="UE Logo">
+        <h3>BS Computer Engineering</h3>
+        <p>University of the East – Manila<br>2023–Present</p>
+      </div>
+      <div class="education-card" onclick="openModal('modal2')">
+        <img src="uemnl4.jpeg" alt="STEM Strand">
+        <h3>STEM Strand</h3>
+        <p>University of the East – Manila<br>2021–2023</p>
+      </div>
+      <div class="education-card" onclick="openModal('modal3')">
+        <img src="vmhs2.jpeg" alt="Victorino Mapa">
+        <h3>Junior High</h3>
+        <p>Victorino Mapa High School<br>2017–2021</p>
+      </div>
+    </div>
+  
+   <!-- Modals -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('modal1')">&times;</span>
+          <h2>BS Computer Engineering</h2>
+          <div class="modal-carousel">
+            <img src="cpe1.jpeg" class="carousel-slide active" alt="photo1">
+            <img src="cpe3.JPG" class="carousel-slide" alt="photo2">
+            <img src="cpe.jpeg" class="carousel-slide" alt="photo3">
+            <img src="cpe4.JPG" class="carousel-slide" alt="photo4">
+      
+            <button class="carousel-btn prev" onclick="changeSlide(-1, 'modal1')">&#10094;</button>
+            <button class="carousel-btn next" onclick="changeSlide(1, 'modal1')">&#10095;</button>
+          </div>
+          <p><strong>School:</strong> University of the East – Manila</p>
+          <p><strong>Years:</strong> 2023–Present</p>
+          <p><strong>Details:</strong> Focused on embedded systems, software development, and algorithm design. Currently building a portfolio and working on interactive robotics.</p>
+        </div>
+      </div>
+
+      <div id="modal2" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('modal2')">&times;</span>
+          <h2>STEM Strand</h2>
+          <div class="modal-carousel">
+            <img src="shs1.JPG" class="carousel-slide active" alt="photo1">
+            <img src="shs4.JPG" class="carousel-slide" alt="photo2">
+            <img src="shs6.jpg" class="carousel-slide" alt="photo3">
+            <img src="shs9.jpeg" class="carousel-slide" alt="photo4">
+      
+            <button class="carousel-btn prev" onclick="changeSlide(-1, 'modal2')">&#10094;</button>
+            <button class="carousel-btn next" onclick="changeSlide(1, 'modal2')">&#10095;</button>
+          </div>
+          <p><strong>School:</strong> University of the East – Manila</p>
+          <p><strong>Years:</strong> 2021–2023</p>
+          <p><strong>Details:</strong> Graduated with honors. Specialized in mathematics, physics, and programming. Developed strong foundations in logic and design.</p>
+        </div>
+      </div>
+
+      <div id="modal3" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('modal3')">&times;</span>
+          <h2>Junior High</h2>
+          <div class="modal-carousel">
+            <img src="jhs1.jpg" class="carousel-slide active" alt="photo1">
+            <img src="jhs2.jpg" class="carousel-slide" alt="photo2">
+            <img src="jhs4.jpg" class="carousel-slide" alt="photo3">
+            <img src="jhs3.jpg" class="carousel-slide" alt="photo4">
+      
+            <button class="carousel-btn prev" onclick="changeSlide(-1, 'modal3')">&#10094;</button>
+            <button class="carousel-btn next" onclick="changeSlide(1, 'modal3')">&#10095;</button>
+          </div>
+          <p><strong>School:</strong> Victorino Mapa High School</p>
+          <p><strong>Years:</strong> 2017–2021</p>
+          <p><strong>Details:</strong> Strong academic performance with early interest in science, math, and technology. Participated in school projects and competitions.</p>
+        </div>
+      </div>
+
+  </section>
+  
+  
+<section id="activity-monitor">
+  <h2 class="activity-title">ACTIVITY MONITOR</h2>
+
+  <div class="carousel-overlay-container">
+    <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="engwk.jpg" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk2.jpg" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk3.jpg" class="d-block w-100" alt="Slide 3">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk5.jpg" class="d-block w-100" alt="Slide 4">
+        </div>
+        <div class="carousel-item">
+          <img src="engwk6.jpg" class="d-block w-100" alt="Slide 5">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk1.jpg" class="d-block w-100" alt="Slide 6">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk2.jpg" class="d-block w-100" alt="Slide 7">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk3.jpg" class="d-block w-100" alt="Slide 8">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk4.jpg" class="d-block w-100" alt="Slide 9">
+        </div>
+        <div class="carousel-item">
+          <img src="foundwk5.jpg" class="d-block w-100" alt="Slide 10">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="experience-section">
+  <div class="experience-title">ORGANIZATIONAL EXPERIENCE</div>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span class="org-name">UE Society of Computer Engineering</span>
+        <span class="org-date">2023-Present</span>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Member</strong> 2023-Present</p>
+        <p>The University of The East Society of Computer Engineering Students (UE SCPES) is a student organization dedicated to fostering academic excellence, professional growth, and community engagement among computer engineering students at the University of The East.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span class="org-name">UE ARMS</span>
+        <span class="org-date">2025</span>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Treasurer</strong> 2025-Present</p>
+        <p>The University of The East Automation Robotics Mechatronics Society (UE ARMS) is a student organization focused on advancing knowledge and skills in automation, robotics, and mechatronics.
+          UE ARMS provides a platform for students to engage in hands-on projects, workshops, and competitions, fostering innovation and technical expertise.</p>
+      </div>
+    </div>
+    
+
+  </div>
+</section>
+
+<section class="workshop-section">
+  <div class="workshop-header">
+    <h2>WORKSHOPS & SEMINARS</h2>
+  </div>
+
+  <section id="photobooth-strip">
+    <div class="photostrip-inner">
+      
+      <div class="photo-block">
+        <div class="photo-frame">
+          <a href="https://www.facebook.com/uescpes/posts/pfbid0hT1W3muvTaPEk7rJdoye9HiMaFnecThbxSwM8WqoZeTCFwgUj9Ai1v2f7zAXhC86l" target="_blank">
+            <img src="figma.jpg" alt="Figma Workshop">
+          </a>
+        </div>
+        <div class="photo-text">
+          <p>Designing with Figma: UI/UX fundamentals and collaborative prototyping.</p>
+        </div>
+      </div>
+
+      <div class="photo-block">
+        <div class="photo-frame">
+          <a href="https://www.facebook.com/uescpes/posts/pfbid08UdZkrkRnDYamvzhX5Q5hXq1SCW9He2m49SpVS5kAnTGDSYsn6kgSpNHLGJbspMRl" target="_blank">
+            <img src="github.jpg" alt="GitHub Seminar">
+          </a>
+        </div>
+        <div class="photo-text">
+          <p>Version control with Git & GitHub: pushing, pulling, and collaborating like a pro.</p>
+        </div>
+      </div>
+
+      <div class="photo-block">
+        <div class="photo-frame">
+          <a href="https://www.facebook.com/uescpes/posts/pfbid02KBkQHryPXEcDzTTGv1LvVHpqyr1aBkXA6mn4e2aGGNuhvX56cpEgJCFDHxuEAW4l" target="_blank">
+            <img src="arduino.jpg" alt="Arduino Session">
+          </a>
+        </div>
+        <div class="photo-text">
+          <p>Arduino hands-on: sensors, servos, and expressive robotics in action.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</section>
+
+    <section class="projects-section">
+      <h2>My Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="tsecs1.jpeg" alt="Project 1">
+          <div class="card-overlay">
+            <h3>Piano Game</h3>
+            <p>You're in a high-stakes scenario—there’s a bomb ticking down, and you’re the only one who can stop it. But here’s the twist: you don’t defuse it with wires or passwords. You stop the timer. Precisely. At 10.000 seconds. Not a millisecond more, not a millisecond less.</p>
+            <button>Learn more</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="project2.jpg" alt="Project 2">
+          <div class="card-overlay">
+            <h3>Pizza</h3>
+            <p>A fun and interactive piano game designed to help kids explore music while developing their rhythm and coordination.</p>
+            <button>Learn more</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="project3.jpg" alt="Project 3">
+          <div class="card-overlay">
+            <h3>Piano Game</h3>
+            <p>A fun and interactive piano game designed to help kids explore music while developing their rhythm and coordination.</p>
+            <button>Learn more</button>
+          </div>
+        </div>
+
+        <!-- Repeat for other cards -->
+        <!-- You can change the image src, title, and message per card -->
+      </div>
+    </section>
+
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+    
+        <div class="carousel">
+          <img src="" class="carousel-slide active" alt="Slide 1">
+          <img src="" class="carousel-slide" alt="Slide 2">
+          <img src="" class="carousel-slide" alt="Slide 3">
+          <button class="prev">&#10094;</button>
+          <button class="next">&#10095;</button>
+        </div>
+    
+        <!-- Description -->
+        <div class="modal-description">
+          <h3 id="modal-title">Project Title</h3>
+          <p id="modal-text">Project description goes here.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  <!-- ✅ Section with ID "contact" -->
+  <section id="contact" class="contact-section">
+    <div class="contact-wrapper">
+      
+      <!-- 📸 Left Side: Photo -->
+      <div class="contact-photo">
+        <img src="picme3.png" alt="Francesca" />
+      </div>
+
+      <!-- 📬 Right Side: Contact Form -->
+      <div class="contact-form">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required rows="5"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+  
+    </div>
+  </section>
+  
+
+  <footer>
+    © 2025 Francesca Borbon. All rights reserved.
+  </footer>
+
+  <!-- ✅ Bootstrap JS for ScrollSpy -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleMenu() {
+      const navList = document.querySelector('nav ul');
+      navList.classList.toggle('active');
+    }
+    document.querySelectorAll('.btn-outline-danger').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-bs-target');
+        const collapse = document.querySelector(targetId);
+        const card = button.closest('.card');
+  
+        // Bootstrap collapse instance
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(collapse);
+        bsCollapse.toggle();
+  
+        // Toggle expanded class for card height
+        card.classList.toggle('expanded');
+      });
+    });
+
+    
+      function openModal(id) {
+        document.getElementById(id).style.display = "block";
+      }
+    
+      function closeModal(id) {
+        document.getElementById(id).style.display = "none";
+      }
+    
+      // Optional: Close modal when clicking outside
+      window.onclick = function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+      }
+      function changeSlide(direction, modalId) {
+        const modal = document.getElementById(modalId);
+        const slides = modal.querySelectorAll('.carousel-slide');
+        let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    
+        slides[currentIndex].classList.remove('active');
+        let newIndex = (currentIndex + direction + slides.length) % slides.length;
+        slides[newIndex].classList.add('active');
+      }
+        function toggleAccordion(header) {
+          const content = header.nextElementSibling;
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+        const images = document.querySelectorAll('.carousel-img');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let current = 0;
+      
+        function showImage(index) {
+          images.forEach(img => img.classList.remove('active'));
+          images[index].classList.add('active');
+        }
+      
+        prevBtn.addEventListener('click', () => {
+          current = (current - 1 + images.length) % images.length;
+          showImage(current);
+        });
+      
+        nextBtn.addEventListener('click', () => {
+          current = (current + 1) % images.length;
+          showImage(current);
+        });
+      
+        showImage(current); // Initial display
+        const modal = document.getElementById("project-modal");
+        const closeBtn = document.querySelector(".close-btn");
+        const learnButtons = document.querySelectorAll(".learn-btn");
+        const modalTitle = document.getElementById("modal-title");
+        const modalText = document.getElementById("modal-text");
+        const slides = document.querySelectorAll(".carousel-slide");
+        const prevBtn2 = document.querySelector(".prev");
+        const nextBtn2 = document.querySelector(".next");
+        let currentSlide = 0;
+      
+        const projectData = [
+          {
+            title: "Piano Game",
+            description: "You're in a high-stakes scenario—there’s a bomb ticking down, and you’re the only one who can stop it. But here’s the twist: you don’t defuse it with wires or passwords. You stop the timer. Precisely. At 10.000 seconds.",
+            images: ["project1-slide1.jpg", "project1-slide2.jpg", "project1-slide3.jpg"]
+          },
+          {
+            title: "Pizza",
+            description: "A fun and interactive piano game designed to help kids explore music while developing their rhythm and coordination.",
+            images: ["project2-slide1.jpg", "project2-slide2.jpg", "project2-slide3.jpg"]
+          },
+          {
+            title: "Piano Game",
+            description: "A fun and interactive piano game designed to help kids explore music while developing their rhythm and coordination.",
+            images: ["project3-slide1.jpg", "project3-slide2.jpg", "project3-slide3.jpg"]
+          }
+        ];
+      
+        learnButtons.forEach((btn, index) => {
+          btn.addEventListener("click", () => {
+            const data = projectData[index];
+            modalTitle.textContent = data.title;
+            modalText.textContent = data.description;
+      
+            slides.forEach((slide, i) => {
+              slide.src = data.images[i];
+              slide.classList.remove("active");
+            });
+      
+            currentSlide = 0;
+            slides[currentSlide].classList.add("active");
+            modal.style.display = "flex";
+          });
+        });
+      
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+      
+        prevBtn.addEventListener("click", () => {
+          slides[currentSlide].classList.remove("active");
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          slides[currentSlide].classList.add("active");
+        });
+      
+        nextBtn.addEventListener("click", () => {
+          slides[currentSlide].classList.remove("active");
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add("active");
+        });
+    
+    
+  </script>
+</body>
+
+  </html>
+  
