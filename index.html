@@ -339,11 +339,15 @@
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
-  max-width: 420px; /* Slightly narrower */
+  max-width: 420px;
+  height: auto;
+  min-height: 600px; /* Taller modal */
   text-align: left;
   color: #4B2E2E;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  overflow-y: auto; /* Enables scroll if content overflows */
 }
+
 
 /* CLOSE BUTTON */
 .close {
